@@ -22,4 +22,14 @@ describe('TestComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('shoud have items', () => {
+    expect(component.items.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('should be not null', () => {
+    expect(component.items).toBeUndefined();
+    const page = fixture.debugElement.componentInstance;
+
+  });
 });

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">help</i>
+          <input id="icon_prefix" type="text" class="validate" [(ngModel)]="searchText" name="searchText">
+          <label for="icon_prefix">Criteria</label>
+        </div>
+        <div class="input-field col s2">
+          <a class="btn" (click)="onSearch()">Search</a>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <table>
+        <thead>
+          <tr>
+            <th>Edit</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Active</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let s of (students | async)?.items">
+            <td><i class="material-icons">edit</i></td>
+            <td>{{s.studentName}}</td>
+            <td>{{s.studentMobile}}</td>
+            <td>{{s.studentEmail}}</td>
+            <td>{{s.studentActive}}</td>
+            <td><i class="material-icons">delete</i></td>
+          </tr>
+          <tr *ngFor="let s of studentData">
+              <td><i class="material-icons">edit</i></td>
+              <td>{{s.studentName}}</td>
+              <td>{{s.studentMobile}}</td>
+              <td>{{s.studentEmail}}</td>
+              <td>{{s.studentActive}}</td>
+              <td><i class="material-icons">delete</i></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ul class="pagination">
+    <li class="disabled">
+      <a href="#!">
+        <i class="material-icons">chevron_left</i>
+      </a>
+    </li>
+    <li *ngFor="let p of (students | async)?.pages">
+      <a href="#!">{{p.label}}</a>
+    </li>
+    <li class="waves-effect">
+      <a href="#!">
+        <i class="material-icons">chevron_right</i>
+      </a>
+    </li>
+  </ul>
+</div>
