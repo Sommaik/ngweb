@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LoginService } from '../../shared/service/login.service';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase/app';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 @Component({
   selector: 'app-login',
@@ -11,10 +14,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   studentEmail = '';
   studentPassword = '';
+  phone = '';
+  otpText = '';
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    public af: AngularFireAuth
   ) {}
 
   ngOnInit() {}
@@ -33,6 +39,40 @@ export class LoginComponent implements OnInit {
           Materialize.toast(resp.message, 4000);
         }
       });
+  }
+
+  loginWithGoogle() {
+    this.af.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  }
+
+  loginWithFB() {
+    this.af.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
+  }
+
+  loginWithTW() {
+    this.af.auth.signInWithRedirect(new firebase.auth.TwitterAuthProvider());
+  }
+
+  loginWithGH() {
+    this.af.auth.signInWithRedirect(new firebase.auth.GithubAuthProvider());
+  }
+
+  loginWithPhone() {
+    this.af.auth.signInWithPhoneNumber(
+      '+66' + this.phone,
+      new firebase.auth.RecaptchaVerifier('recapt-id')
+    ).then(confirmationResult => {
+      window['confirmationResult'] = confirmationResult;
+    })
+    .catch(error => {});
+  }
+
+  confirmOtp() {
+    window['confirmationResult'].confirm(this.otpText).then( (resp) => {
+      console.log(resp);
+    }).catch((e) => {
+      console.log(e);
+    });
   }
 
 }

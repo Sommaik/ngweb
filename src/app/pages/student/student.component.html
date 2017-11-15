@@ -29,21 +29,21 @@
 
         <tbody>
           <tr *ngFor="let s of (students | async)?.items">
-            <td><i class="material-icons">edit</i></td>
+            <td><i class="material-icons" (click)="onEdit(s.studentId)">edit</i></td>
             <td>{{s.studentName}}</td>
             <td>{{s.studentMobile}}</td>
             <td>{{s.studentEmail}}</td>
             <td>{{s.studentActive}}</td>
-            <td><i class="material-icons">delete</i></td>
+            <td><i class="material-icons waves-effect waves-light" (click)="onDelete(s.studentId)" >delete</i></td>
           </tr>
-          <tr *ngFor="let s of studentData">
+          <!-- <tr *ngFor="let s of studentData">
               <td><i class="material-icons">edit</i></td>
               <td>{{s.studentName}}</td>
               <td>{{s.studentMobile}}</td>
               <td>{{s.studentEmail}}</td>
               <td>{{s.studentActive}}</td>
               <td><i class="material-icons">delete</i></td>
-            </tr>
+            </tr> -->
         </tbody>
       </table>
     </div>
@@ -55,8 +55,8 @@
         <i class="material-icons">chevron_left</i>
       </a>
     </li>
-    <li *ngFor="let p of (students | async)?.pages">
-      <a href="#!">{{p.label}}</a>
+    <li *ngFor="let p of (students | async)?.pages" [ngClass]="{'active': p.type == 'current'}">
+      <a class="waves-effect waves-light" (click)="onPagination(p.url)">{{p.label}}</a>
     </li>
     <li class="waves-effect">
       <a href="#!">
@@ -65,3 +65,5 @@
     </li>
   </ul>
 </div>
+<a class="btn-floating btn-large waves-effect waves-light red right" routerLink="/admin/student-form/0"><i class="material-icons">add</i></a>
+

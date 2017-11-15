@@ -8,6 +8,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { StudentComponent } from './pages/student/student.component';
 import { StudentFormComponent } from './pages/student-form/student-form.component';
 import { AdminGuard } from './shared/guard/admin.guard';
+import { Db1Component } from './pages/db1/db1.component';
+import { Db2Component } from './pages/db2/db2.component';
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +24,10 @@ const routes: Routes = [
         path: 'testparam/:id', component: TestComponent
       }, {
         path: 'login', component: LoginComponent
+      }, {
+        path: 'db1', component: Db1Component
+      }, {
+        path: 'db2', component: Db2Component
       }]
   }, {
     path: 'admin',
@@ -32,7 +38,7 @@ const routes: Routes = [
     }, {
       path: 'student', component: StudentComponent
     }, {
-      path: 'student-form', component: StudentFormComponent
+      path: 'student-form/:id', component: StudentFormComponent
     }]
   }
 ];
